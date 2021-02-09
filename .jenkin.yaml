@@ -1,0 +1,32 @@
+---
+environment_variables:
+  MARIADB_VERSION: "10.5.8-2"
+  PROXYSQL_VERSION: "2.0.14-1"
+git:
+  branch: master
+triggers:
+  cron: "@daily"
+clean_workspace: true
+script:
+  - echo "Mock build to start dependent extra jobs"
+downstream:
+  - docker-sunet-drive-mariadb
+  - docker-sunet-drive-proxysql
+
+extra_jobs:
+    - name: docker-sunet-drive-mariadb
+      builders:
+        - docker
+      docker_name: drive/mariadb
+      docker_context_dir: mariadb
+      docker_tags:
+        - "${MARIADB_VERSION}"
+      downstream: []
+    - name: docker-sunet-drive-proxysql
+      builders:
+        - docker
+      docker_name: drive/proxysql
+      docker_context_dir: proxysql
+      docker_tags:
+        - "${PROXYSQL_VERSION}"
+      downstream: []
