@@ -1,6 +1,6 @@
 ---
 environment_variables:
-  MARIADB_VERSION: "10.5.8-2"
+  MARIADB_VERSION: "10.5.9-2"
   PROXYSQL_VERSION: "2.0.14-1"
 git:
   branch: master
