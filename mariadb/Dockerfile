@@ -9,7 +9,6 @@ RUN mkdir /backups
 RUN apt-get update; \
   apt-get upgrade -y; \
   apt-get install -y \
-  gosu \
   mariadb-backup \
   mariadb-client \
   mariadb-server \
@@ -42,4 +41,5 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 3306
+USER mysql
 CMD ["mysqld"]
