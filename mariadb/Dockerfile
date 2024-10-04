@@ -9,16 +9,17 @@ RUN mkdir /backups
 RUN apt-get update; \
   apt-get upgrade -y; \
   apt-get install -y \
-  mariadb-server \
-  mariadb-client \
+  gosu \
   mariadb-backup \
-  socat \
+  mariadb-client \
+  mariadb-server \
   openssl \
-  pv \
   pigz \
+  pv \
   rsync \
-  tzdata \
+  socat \
   sysstat \
+  tzdata \
   ; \
   rm -rf /var/lib/apt/lists/*; \
   # purge and re-create /var/lib/mysql with appropriate ownership
