@@ -359,6 +359,11 @@ _main() {
 		mysql_note "Creating database directories.."
 		docker_create_db_directories
 
+		# If container is started as root user, restart as dedicated mysql user
+		if [ "$(id -u)" = "0" ]; then
+			mysql_note "Switching to dedicated user 'mysql'"
+			exec gosu mysql "$BASH_SOURCE" "$@"
+		fi
 
 		# there's no database, so it needs to be initialized
 		if [ -z "$DATABASE_ALREADY_EXISTS" ]; then
