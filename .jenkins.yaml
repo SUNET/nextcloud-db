@@ -1,7 +1,7 @@
 ---
 environment_variables:
   MARIADB_VERSION: "10.5.9-2"
-  PROXYSQL_VERSION: "ubuntu-focal-1"
+  PROXYSQL_VERSION: "debian-slim-1"
 git:
   branch: master
 triggers:

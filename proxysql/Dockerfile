@@ -1,6 +1,6 @@
-FROM ubuntu:focal
+FROM debian:bookworm-slim
 # Distro should match the one in the proxysql package name
-ARG DISTRO=ubuntu20
+ARG DISTRO=debian12
 
 # Proxysql version, based on https://github.com/sysown/proxysql/releases
 ARG VERSION=2.7.1
