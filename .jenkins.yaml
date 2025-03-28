@@ -1,6 +1,6 @@
 ---
 environment_variables:
-  MARIADB_VERSION: "bullseye-10.5"
+  MARIADB_VERSION: "bookworm-slim-1"
   PROXYSQL_VERSION: "bookworm-slim-1"
 git:
   branch: master
