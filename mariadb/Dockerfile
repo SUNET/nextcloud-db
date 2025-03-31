@@ -1,13 +1,20 @@
-FROM debian:bookworm-slim
+FROM debian:bullseye-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN mkdir /docker-entrypoint-initdb.d
 RUN mkdir /backups
 
-
 RUN apt-get update; \
   apt-get upgrade -y; \
+  apt-get install -y \
+  curl
+RUN curl -LsSO https://r.mariadb.com/downloads/mariadb_repo_setup
+RUN echo "c4a0f3dade02c51a6a28ca3609a13d7a0f8910cccbb90935a2f218454d3a914a mariadb_repo_setup" \
+    | sha256sum -c -
+RUN chmod +x mariadb_repo_setup 
+RUN bash -x ./mariadb_repo_setup --mariadb-server-version="mariadb-10.5"
+RUN apt-get update; \
   apt-get install -y \
   mariadb-backup \
   mariadb-client \
@@ -39,7 +46,6 @@ VOLUME /backups
 
 COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
-
-EXPOSE 3306
 USER mysql
+EXPOSE 3306
 CMD ["mysqld"]
